@@ -1,6 +1,7 @@
 // list/list.c
 // Implementation for linked list.
 // Created by Mary Nwosu on 9/15/22
+// Modified by Mary Nwosu on 9/28/22
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -136,26 +137,36 @@ bool list_is_in(list_t *l, elem v) {
 
   for(x=0; x < count; x++ ){
     if(curr->value == v) {
-      printf("Is %d in the list? Yes it is! :) \n", v);
+      // printf("Is %d in the list? Yes it is! :) \n", v);
       return true;
     }
     curr = curr->next;
   }
-  printf("Is %d in the list? No, it isn't. :/ \n", v);
+  // printf("Is %d in the list? No, it isn't. :/ \n", v);
   return false;
 }
 
 
 elem list_get_elem_at(list_t *l, int index) {
-  int x = 0;
+  int x = 0, len;
   node_t* curr = l->head;
   int count = index;
+
+  len = list_length(l);
+  if (index > len) {
+    // printf("The index %d is not in the list.\n", index);
+    return -1;
+  }
+
+  if (index==0) {
+    return curr->value;
+  }
 
   while (x < count){
     curr = curr->next;
     x++;
   }
-  printf("The element at index %d is %d.\n", index, curr->value);
+  // printf("The element at index %d is %d.\n", index, curr->value);
   return curr->value;
 }
 
@@ -167,12 +178,12 @@ int list_get_index_of(list_t *l, elem v) {
 
   for(x=0; x < count; x++ ){
     if(curr->value == v) {
-      printf("The element %d is at index %d.\n", v, x);
+      // printf("The element %d is at index %d.\n", v, x);
       return x;
     }
     curr = curr->next;
   }
-  printf("The element %d is not in the list.\n", v);
+  // printf("The element %d is not in the list.\n", v);
   return -1;
 }
 
